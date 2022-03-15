@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Patriot Ammo</h1>
+    @Html.ActionLink("Learn More About Us", "About")
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Products</h2>
+        <p>
+            Our Ammunition Dump is locatedd in rural Indiana, is host to a multitude of fine food and items of destruction. <br />
+            Come browse our products and see what we have for you!
+        </p>
+        @Html.ActionLink("Check Products", "Index", "Product", null, new { @class = " btn btn-warning btn-large"})
+    </div>
+    <div class="col-md-4">
+        <h2>Customers</h2>
+        <p>Check out the list of customers knitwit. </p>
+        @Html.ActionLink("Customer List", "Index", "Customer", null, new { @class = "btn btn-warning btn-large"})
+    </div>
+    <div class="col-md-4">
+        <h2>Web Hosting</h2>
+        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    </div>
+</div>
