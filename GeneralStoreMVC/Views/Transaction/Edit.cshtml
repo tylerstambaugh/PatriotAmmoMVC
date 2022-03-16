@@ -1,30 +1,31 @@
-﻿@model GeneralStore.Models.TransactionModels.TransactionCreate
+﻿@model GeneralStore.Models.TransactionModels.TransactionDetail
 
 @{
-    ViewBag.Title = "Create A Transaction ya nimkimpoop";
+    ViewBag.Title = "Edit";
 }
+@if (ViewData["Error"] != null)
+{
+    <h3 class="text-center text-danger">@ViewData["Error"]</h3>
+}
+<h2>Edit</h2>
 
-<h2>Create</h2>
-@if(ViewData["Error"] != null)
-            {
-                <h3 class="text-center text-danger">@ViewData["Error"]</h3>
-            }
-
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>Create Transaction</h4>
+        <h4>Edit Transaction</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.TransactionId)
+
         @*<div class="form-group">
-            @Html.LabelFor(model => model.TransactionDate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TransactionDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TransactionDate, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
+                @Html.LabelFor(model => model.TransactionDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TransactionDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TransactionDate, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.CustomerId, "CustomerId", htmlAttributes: new { @class = "control-label col-md-2" })
@@ -44,7 +45,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Update Transaction" class="btn btn-default" />
             </div>
         </div>
     </div>

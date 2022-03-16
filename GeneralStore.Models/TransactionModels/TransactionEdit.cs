@@ -9,22 +9,20 @@ using System.Threading.Tasks;
 
 namespace GeneralStore.Models.TransactionModels
 {
-    public class TransactionDetail
+    public class TransactionEdit
     {
         [Key]
         public int TransactionId { get; set; }
-        public DateTime TransactionDate { get; set; }
-
+        
         //[Required(false, [ErrorMessage = "Item Count is required"])]
         //public int ItemCount { get; set; }
 
-        //Customer relationship and navigation property
-        [Required, ForeignKey(nameof(Customer))]
+        [Required, ForeignKey("Customer")]
         public int CustomerId { get; set; }
         public virtual Customer Customer { get; set; }
 
         //Product relationship and navigation property
-        [Required, ForeignKey(nameof(Product))]
+        [Required, ForeignKey("Product")]
         public int ProductId { get; set; }
         public virtual Product Product { get; set; }
     }

@@ -29,5 +29,7 @@ namespace GeneralStore.Data
         public int ProductId { get; set; }
         public virtual Product Product { get; set; }
 
+        //public Guid UserId { get; set; }
+
     }
 }

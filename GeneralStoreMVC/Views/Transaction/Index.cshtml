@@ -1,10 +1,11 @@
 ﻿@model IEnumerable<GeneralStore.Models.TransactionModels.TransactionDetail>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Transactions";
 }
 
-<h2>Index</h2>
+<h2>List of Transactions. </h2>
+<h4>"Coffee is for closers."</h4>
 
 <p>
     @Html.ActionLink("Create Transaction", "Create")
@@ -12,7 +13,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Customer.FirstName)
+            @Html.DisplayNameFor(model => model.TransactionId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerId)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Product.Name)
@@ -28,7 +32,10 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Customer.FirstName)
+                    @Html.DisplayFor(modelItem => item.TransactionId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerId)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Product.Name)

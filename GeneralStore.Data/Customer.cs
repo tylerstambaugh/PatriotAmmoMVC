@@ -19,6 +19,6 @@ namespace GeneralStore.Data
         public string LastName { get; set; }
 
         [Display(Name = "Full Name")]
-        public string FullName { get; }
+        public string FullName => $"{FirstName} {LastName}";
     }
 }

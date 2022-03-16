@@ -53,6 +53,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransactionModels\TransactionCreate.cs" />
     <Compile Include="TransactionModels\TransactionDetail.cs" />
+    <Compile Include="TransactionModels\TransactionEdit.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ProductModels\ProductDetail.cs" />

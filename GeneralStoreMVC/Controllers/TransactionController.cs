@@ -34,23 +34,43 @@ namespace GeneralStoreMVC.Controllers
         // GET: Transaction
         public ActionResult Index()
         {
-            return View();
+            var cs = CreateCustomerService();
+            var ps = CreateProductService();
+            TransactionService ts = CreateTransactionService();
+            var transactions = ts.GetAllTransactions();
+            return View(transactions);
         }
 
         // GET: /Transaction/Cretae
         [HttpGet]
         public ActionResult Create()
         {
+
             //Get list of customers for dropdown:
             var cs = CreateCustomerService();
             var ps = CreateProductService();
             //var allCustomers = cs.GetAllCustomers();
-            ViewBag.CustomerItems = cs.GetAllCustomers().Select(customer => new SelectListItem
+            //ViewBag.CustomerItems = cs.GetAllCustomers().Select(customer => new SelectListItem
+            //{
+            //    Text = customer.FirstName + " " + customer.LastName,
+            //    Value = customer.CustomerId.ToString()
+            //});
+           
+            //ViewBag.ProductItems = new SelectList(ps.GetAllProducts(), "ProductID", "Name");
+
+            ViewData["Products"] = ps.GetAllProducts().Select(product => new SelectListItem
             {
-                Text = customer.FirstName + " " + customer.LastName,
+                Text = product.Name,
+                Value = product.ProductId.ToString()
+            });
+
+            ViewData["Customers"] = cs.GetAllCustomers().Select(customer => new SelectListItem
+            {
+                Text = $"{customer.FirstName}",
                 Value = customer.CustomerId.ToString()
             });
-            ViewBag.ProductItems = new SelectList(ps.GetAllProducts(), "ProductID", "Name");
+
+
             return View(new TransactionCreate());
         }
 
@@ -59,7 +79,84 @@ namespace GeneralStoreMVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(TransactionCreate model)
         {
-            return View();
+            var cs = CreateCustomerService();
+            var ps = CreateProductService();
+
+            ViewData["Products"] = ps.GetAllProducts().Select(product => new SelectListItem
+            {
+                Text = product.Name,
+                Value = product.ProductId.ToString()
+            });
+
+            ViewData["Customers"] = cs.GetAllCustomers().Select(customer => new SelectListItem
+            {
+                Text = $"{customer.FirstName}",
+                Value = customer.CustomerId.ToString()
+            });
+            //find customer and product id in database before creating
+
+            //ViewData{"Error"] = "invalid product Id"
+            TransactionService ts = CreateTransactionService();
+            if(ts.CreateTransaction(model))
+            return RedirectToAction("Index");
+
+            return View(model);
+        }
+
+
+        //GET /Transaction/Edit/{id}
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            //validate the id
+
+            //populate the dropdowns
+            var cs = CreateCustomerService();
+            var ps = CreateProductService();
+
+            ViewData["Products"] = ps.GetAllProducts().Select(product => new SelectListItem
+            {
+                Text = product.Name,
+                Value = product.ProductId.ToString()
+            });
+
+            ViewData["Customers"] = cs.GetAllCustomers().Select(customer => new SelectListItem
+            {
+                Text = $"{customer.FirstName}",
+                Value = customer.CustomerId.ToString()
+            });
+
+            var ts = CreateTransactionService();
+            TransactionDetail td = ts.GetTransactionById(id);
+            return View(td);
+        }
+        //GET /Transaction/Edit
+        [HttpPost]
+        public ActionResult Edit(int id, TransactionEdit model)
+        {
+            //validate the id
+
+            //populate the dropdowns
+            var cs = CreateCustomerService();
+            var ps = CreateProductService();
+
+            ViewData["Products"] = ps.GetAllProducts().Select(product => new SelectListItem
+            {
+                Text = product.Name,
+                Value = product.ProductId.ToString()
+            });
+
+            ViewData["Customers"] = cs.GetAllCustomers().Select(customer => new SelectListItem
+            {
+                Text = $"{customer.FirstName}",
+                Value = customer.CustomerId.ToString()
+            });
+
+            TransactionService ts = CreateTransactionService();
+            if (ts.EditTransaction(id, model))
+                return RedirectToAction("Index");
+
+            return View(model);
         }
     }
 }
